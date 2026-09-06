@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Alex Meub is a product manager and web developer from Portland, Oregon.">
+  
+
+  <title>Alex Meub</title>
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="alternate" type="application/atom+xml" title="Alex Meub" href="/atom.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Alex Meub</a>
+        </h3>
+        <ul class="nav">
+          <li><a href="/">Blog</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </header>
+
+      <main class="body">
+        <h1 class="page-title" style="margin-bottom: 1rem;">Blog Posts</h1>
+
+<div class="archive">
+
+
+    
+    
+
+    
+    <!--<h2 id="2026-ref" class="archive-year">2026</h2>-->    
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">March 17, 2026</span>
+      <a href="/progress-quest-the-original-idle-game/" class="archive-title">
+        A Look at Progress Quest: The Original Idle Game
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 26, 2026</span>
+      <a href="/quantum-fiber-with-unifi-gear/" class="archive-title">
+        Quantum Fiber with the Unifi UCG Ultra
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2025-ref" class="archive-year">2025</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">July 27, 2025</span>
+      <a href="/playdate-retro-dock/" class="archive-title">
+        Making a Retro Dock for the Playdate Console
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 23, 2025</span>
+      <a href="/swarmturret-upgrades/" class="archive-title">
+        Upgrading the SwarmTurret
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2024-ref" class="archive-year">2024</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">September 22, 2024</span>
+      <a href="/building-the-datatoaster-3000/" class="archive-title">
+        Building the DataToaster 3000
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">September 04, 2024</span>
+      <a href="/building-a-removable-bike-basket-for-yepp-rack/" class="archive-title">
+        Building a Removable Bike Basket for the Yepp Rack
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 24, 2024</span>
+      <a href="/yoto-mini-is-perfect/" class="archive-title">
+        The Yoto Mini is Perfect
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2023-ref" class="archive-year">2023</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">December 24, 2023</span>
+      <a href="/how-to-quiet-down-your-3d-printer/" class="archive-title">
+        How To Quiet Down Your 3D Printer
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">June 15, 2023</span>
+      <a href="/building-an-eink-joke-fridge-magnet/" class="archive-title">
+        Building an E-Ink Joke of the Day Fridge Magnet
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">March 14, 2023</span>
+      <a href="/automating-capacitive-buttons-with-switchbot/" class="archive-title">
+        Automating Capacitive Buttons with a Modified Switchbot
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2022-ref" class="archive-year">2022</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">July 31, 2022</span>
+      <a href="/building-a-wifi-controlled-nerf-turret/" class="archive-title">
+        Building a Wi-Fi Controlled Nerf Turret
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 23, 2022</span>
+      <a href="/my-favorite-tiny-projects/" class="archive-title">
+        My Favorite Tiny Programming Projects
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 21, 2022</span>
+      <a href="/fixing-prusa-mintemp-with-firmware/" class="archive-title">
+        Fixing the Prusa MINTEMP Error with Custom Firmware
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2021-ref" class="archive-year">2021</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">December 13, 2021</span>
+      <a href="/better-wheels-for-traeger-grill/" class="archive-title">
+        Better Wheels for the Traeger Tailgater
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">June 01, 2021</span>
+      <a href="/building-a-3d-printer-enclosure/" class="archive-title">
+        Building a 3D Printer Enclosure
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">April 15, 2021</span>
+      <a href="/craigslist-early-notification-exploit/" class="archive-title">
+        A Craigslist Early Notification Exploit
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2020-ref" class="archive-year">2020</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 18, 2020</span>
+      <a href="/controlling-wemo-with-esp8266/" class="archive-title">
+        Controlling Wemo Smart Plugs with Arduino
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 01, 2020</span>
+      <a href="/building-wifi-buttons-with-esp8266/" class="archive-title">
+        Building Wi-Fi Buttons with ESP8266
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 19, 2020</span>
+      <a href="/office-bell-ringer/" class="archive-title">
+        The Office Bell Ringer
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2019-ref" class="archive-year">2019</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">June 03, 2019</span>
+      <a href="/building-an-arcade-stick/" class="archive-title">
+        Building an Arcade Stick
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 05, 2019</span>
+      <a href="/portland-parking-tickets/" class="archive-title">
+        A Quick Look at Portland Parking Ticket Data
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 20, 2019</span>
+      <a href="/adding-ipv6-support-to-cloudfront-and-s3/" class="archive-title">
+        How to Add IPv6 Support to CloudFront and S3 Websites
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2018-ref" class="archive-year">2018</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">December 26, 2018</span>
+      <a href="/favorite-web-apps/" class="archive-title">
+        My Favorite Web Apps and Tools
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">October 15, 2018</span>
+      <a href="/weber-q-grill-upgrades/" class="archive-title">
+        Upgrading the Weber Q Grill
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 31, 2018</span>
+      <a href="/apple-cna-slowness-problems/" class="archive-title">
+        Apple Captive Network Assistant Slowness Problems on iOS
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2017-ref" class="archive-year">2017</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">September 10, 2017</span>
+      <a href="/setting-up-free-ssl-on-aws/" class="archive-title">
+        Setting Up Free SSL for Static Sites on AWS
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">July 09, 2017</span>
+      <a href="/craigslist-alerts-with-python/" class="archive-title">
+        Craigslist Alerts with Python
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">April 10, 2017</span>
+      <a href="/apple-captive-network-assistant-macos/" class="archive-title">
+        About the Apple Captive Network Assistant
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2016-ref" class="archive-year">2016</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">October 13, 2016</span>
+      <a href="/buying-a-house-in-portland/" class="archive-title">
+        Buying a House in Portland
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 05, 2016</span>
+      <a href="/s3-website-outofmemoryerror/" class="archive-title">
+        S3 Website Out Of Memory Error
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 01, 2016</span>
+      <a href="/hacking-amazon-dash-buttons/" class="archive-title">
+        Hacking Amazon Dash Buttons
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">March 15, 2016</span>
+      <a href="/recreating-the-windows-bsod/" class="archive-title">
+        Recreating the Windows BSOD
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2015-ref" class="archive-year">2015</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 03, 2015</span>
+      <a href="/finding-campsites-with-python/" class="archive-title">
+        Finding Campsites with Python
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">July 13, 2015</span>
+      <a href="/material-rewards-for-motivation/" class="archive-title">
+        Material Rewards for Motivation
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">March 24, 2015</span>
+      <a href="/earth-art-fart/" class="archive-title">
+        A Great Bumper Sticker
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 26, 2015</span>
+      <a href="/old-windows-icons/" class="archive-title">
+        Windows 98 Icons are Great
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 27, 2015</span>
+      <a href="/dropbox-public-links/" class="archive-title">
+        Dealing with Dropbox Link Overages
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 12, 2015</span>
+      <a href="/perfect-moscow-mule/" class="archive-title">
+        The Perfect Moscow Mule
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2014-ref" class="archive-year">2014</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">July 09, 2014</span>
+      <a href="/mac-setup-v2/" class="archive-title">
+        My Mac OSX Setup
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">April 21, 2014</span>
+      <a href="/a-look-at-car2go-data/" class="archive-title">
+        A Look at Portland Car2Go Data
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">March 10, 2014</span>
+      <a href="/css-position/" class="archive-title">
+        Understanding CSS Position
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 16, 2014</span>
+      <a href="/indeterminate-checkboxes/" class="archive-title">
+        Indeterminate Checkboxes
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 06, 2014</span>
+      <a href="/windows-npm-install-jsdom/" class="archive-title">
+        Install JSDOM On Windows
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">January 28, 2014</span>
+      <a href="/chromecast-backgrounds/" class="archive-title">
+        Chromecast Backgrounds
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2013-ref" class="archive-year">2013</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">October 27, 2013</span>
+      <a href="/natural-box-model/" class="archive-title">
+        Use the Natural CSS Box Model
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">September 01, 2013</span>
+      <a href="/best-games-ever/" class="archive-title">
+        The Best Games Ever Made
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 03, 2013</span>
+      <a href="/my-entertainment-setup/" class="archive-title">
+        A Pretty Good Entertainment Setup
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 12, 2013</span>
+      <a href="/protect-your-wireless-network/" class="archive-title">
+        Protect Your Wireless Network
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">February 18, 2013</span>
+      <a href="/amazon-top-rated/" class="archive-title">
+        Amazon's Top Rated Items
+      </a>
+    </div>
+
+    
+        
+        <h2 id="2012-ref" class="archive-year">2012</h2>
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">November 14, 2012</span>
+      <a href="/remove-child-ie-and-ssl/" class="archive-title">
+        IE 6,7,8 Warning with removeChild
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">September 20, 2012</span>
+      <a href="/set-up-remote-desktop/" class="archive-title">
+        Set Up Remote Desktop in Windows
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">August 12, 2012</span>
+      <a href="/ie-dev-testing-setup/" class="archive-title">
+        The Holy Grail of IE Testing
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">June 29, 2012</span>
+      <a href="/ie7-and-the-zoom-property/" class="archive-title">
+        Fun with IE7 and the Zoom Property
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 24, 2012</span>
+      <a href="/how-does-jsonp-work/" class="archive-title">
+        How does JSONP work?
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">May 05, 2012</span>
+      <a href="/browser-market-share/" class="archive-title">
+        Hotel Guest User Agent Data
+      </a>
+    </div>
+
+    
+        
+    
+
+    
+    
+
+    
+
+    <div class="archive-item">
+      <span class="post-date archive-date">April 10, 2012</span>
+      <a href="/must-have-windows-apps/" class="archive-title">
+        Must-have Windows Apps
+      </a>
+    </div>
+
+        
+    
+
+</div>
+
+      </main>
+
+      <footer class="footer">
+       
+          Copyright &copy; <time datetime="2026-09-03T09:47:45-07:00">2026</time> Alex Meub
+        
+      </footer>
+    </div>
+    <script data-goatcounter="https://a9n27kisdf.execute-api.us-east-1.amazonaws.com/count/alexmeub"
+            async src="//alexmeub.com/count.js"></script>
+  </body>
+</html>

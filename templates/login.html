@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFT Server - Logon Panel</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: linear-gradient(to bottom, #5a7edc 0%, #3b5a9a 100%);
+            font-family: "Tahoma", "Segoe UI", sans-serif;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
+            color: white; overflow: hidden; position: relative;
+        }
+        .login-panel {
+            display: flex; width: 100%; height: 360px;
+            background-color: #7da2e1;
+            border-top: 4px solid #ffffff; border-bottom: 4px solid #1c3f7d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        .left-pane {
+            width: 45%; display: flex; flex-direction: column;
+            justify-content: center; align-items: flex-end;
+            padding-right: 40px; border-right: 2px solid #5271b4;
+            position: relative;
+        }
+        .right-pane {
+            width: 55%; display: flex; flex-direction: column;
+            justify-content: center; padding-left: 40px;
+            background: linear-gradient(to right, #7da2e1, #5d83cd);
+        }
+        
+        /* Corporate Logo Container Integration Wrapper */
+        .company-logo-container {
+            width: 70px; height: 70px; background: #2e7d32; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #ffffff; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: 12px;
+        }
+        .logo-text { font-size: 32px; font-weight: bold; font-style: italic; text-shadow: 2px 2px 3px #000; letter-spacing: -1px; }
+        .sub-text { font-size: 13px; color: #d6e2f7; font-weight: bold; margin-top: 2px; }
+        
+        input[type="text"], input[type="password"] {
+            padding: 5px; border: 2px solid #7f9db9; font-size: 14px; margin-bottom: 10px; width: 200px;
+            color: black; background-color: white; border-radius: 1px;
+        }
+        button {
+            background: linear-gradient(to bottom, #ffffff 0%, #e3e3e3 100%);
+            border: 1px solid #707070; padding: 5px 15px; cursor: pointer; border-radius: 3px; font-weight: bold; color: black;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        button:active { background: #dedcd0; }
+
+        /* Authentic Error Dialog Alert Banner Component */
+        .error-alert-banner {
+            display: none; background: #fff6f6; border: 1px solid #cc3333;
+            color: #990000; padding: 8px; font-size: 12px; font-weight: bold;
+            width: 200px; margin-bottom: 12px; border-radius: 2px;
+            align-items: center; gap: 8px; box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+        }
+
+        /* Corporate Signature Placement Positioning Matrix */
+        .corporate-footer-sig {
+            position: absolute; bottom: 15px; left: 15px;
+            font-size: 12px; color: #b5cfef; font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-panel">
+        <div class="left-pane">
+            <!-- Inline SVG Vector Replication of Attached Logo Profile -->
+            <div class="company-logo-container">
+                <svg width="46" height="46" viewBox="0 0 100 100" fill="none" xmlns="http://w3.org">
+                    <circle cx="50" cy="50" r="45" fill="#338a3e"/>
+                    <path d="M25 55 C 25 55, 35 48, 50 55 C 65 62, 75 55, 75 55 L 72 63 C 72 63, 62 70, 50 63 C 38 56, 28 63, 28 63 Z" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M30 52 L 35 38 L 45 38 L 43 47 Z" fill="none" stroke="white" stroke-width="4"/>
+                    <path d="M50 32 A 18 18 0 0 1 68 50" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M50 40 A 10 18 0 0 1 60 51" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">LFT Server</div>
+            <div class="sub-text">Local File Transmission</div>
+        </div>
+        <div class="right-pane">
+            <!-- Intercepted submission action pipeline avoiding blank redirections -->
+            <form id="logonFormPortal">
+                <div style="font-size: 15px; margin-bottom: 12px; font-weight: bold;">To begin, type your account credentials</div>
+                
+                <!-- The Display Error Alert Wrapper Element -->
+                <div class="error-alert-banner" id="errorPopupBox">
+                    <span>❌</span> <span>Invalid username or password.</span>
+                </div>
+
+                <input type="text" id="inputUser" placeholder="Username" required><br>
+                <input type="password" id="inputPass" placeholder="Password" required><br>
+                <button type="submit">Log On</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Corporate Attribution Label Indicator Element -->
+    <div class="corporate-footer-sig">Tech Day's Communication</div>
+
+    <script>
+        document.getElementById('logonFormPortal').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('inputUser').value;
+            const pass = document.getElementById('inputPass').value;
+            const errBox = document.getElementById('errorPopupBox');
+
+            errBox.style.display = 'none';
+
+            // Send async credentials authentication tracking payload down back-end channels
+            let formData = new FormData();
+            formData.append('username', user);
+            formData.append('password', pass);
+
+            fetch('/login', { method: 'POST', body: formData })
+                .then(res => {
+                    if (res.redirected || res.ok) {
+                        // Route safely onto desktop matrix if validation metrics match
+                        window.location.href = "/desktop";
+                    } else {
+                        throw new Error("Validation mismatch");
+                    }
+                })
+                .catch(err => {
+                    // Trigger localized error message feedback instantly on the canvas
+                    errBox.style.display = 'flex';
+                    document.getElementById('inputPass').value = "";
+                });
+        });
+    </script>
+</body>
+</html>

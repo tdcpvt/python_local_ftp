@@ -1,0 +1,15 @@
+# Ignore the isolated Python virtual environment folders
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Ignore your persistent user database (Contains login text blocks & passwords)
+users_db.json
+
+# Ignore the actual stored client files and uploaded documents data root
+ftp_root/
+
+# Ignore local temporary or test log files
+*.log
+.DS_Store

@@ -1,0 +1,104 @@
+<!-- WINDOW 1: ADVANCED FILE REGISTER EXPLORER -->
+<div class="xp-window" id="explorerWindow">
+    <div class="window-header">
+        <span id="explorerTitle">My Computer System Shared Root</span>
+        <div class="close-btn" onclick="closeWindow('explorerWindow')">X</div>
+    </div>
+    <div class="window-body">
+        <div class="explorer-layout">
+            <div class="sidebar">
+                <button onclick="loadFolder('Public')">📂 Public Share</button>
+                <button onclick="loadFolder('Private')">🔒 Private Area</button>
+            </div>
+            <div class="file-pane" id="dropZoneContainer">
+                
+                <div id="loadingProgressBox">⏳ Transmitting tracking packets... Please wait.</div>
+                
+                <div style="flex-grow:1; overflow-y:auto; border:1px solid #7f9db9; background:white;">
+                    <table class="file-table" id="fileGridTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th><th>Size</th><th>Uploaded By</th><th>Date & Time</th><th>Remark</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fileListContainer">
+                            <tr><td colspan="6" style="text-align:center; color:gray; padding:20px;">Select a partition layer folder node in the panel.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="dragDropVisualTarget" style="display:none; margin:6px 0; padding:10px; border:2px dashed #3a71ca; background:#f0f4fc; text-align:center;">
+                    <span style="font-size:11px; font-weight:bold; color:#1a3b75;">📂 Drop system files directly into this box area</span>
+                </div>
+
+                <!-- FIXED FORM WITH name="file" ATTRIBUTE INJECTED -->
+                <form id="uploadForm" onsubmit="handleManualUploadSubmit(event)" style="margin-top:6px; display:none; background:#f4f2e6; padding:6px; border:1px solid #b5b2a1;">
+                    <span style="font-size:11px; font-weight:bold; color:black;">Upload New File Component:</span>
+                    <div style="display:flex; gap:6px; align-items:center; margin-top:4px;">
+                        <input type="file" id="manualFileInput" name="file" required style="font-size:11px; color:black; width:40%;">
+                        <input type="text" id="manualRemarkInput" placeholder="Add custom upload remark notes here..." style="font-size:11px; padding:3px; flex-grow:1; margin-bottom:0; color:black;">
+                        <input type="submit" value="Send" class="action-btn" style="padding:2px 10px;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WINDOW 2: ADMIN SECTOR CONSOLE -->
+{% if role == 'admin' %}
+<div class="xp-window" id="adminWindow" style="height: 390px;">
+    <div class="window-header">
+        <span>User Account Configuration & Capacity Manager</span>
+        <div class="close-btn" onclick="closeWindow('adminWindow')">X</div>
+    </div>
+    <div class="window-body" style="overflow-y: auto;">
+        <div style="background:#fff; border:1px solid #7f9db9; padding:8px; margin-bottom:10px; font-size:11px;">
+            <strong>Live Disk Capacity Tracker:</strong>
+            <div class="quota-bar-container">
+                <div class="quota-bar-fill" id="adminQuotaFillBar"></div>
+            </div>
+            <div style="margin-top:4px; text-align:right;" id="adminQuotaTextLogger">Calculating space...</div>
+        </div>
+
+        <form action="/admin/create_user" method="POST" style="background:#e4e2d5; padding:6px; border:1px solid #b5b2a1; display:flex; gap:6px; align-items:center;">
+            <input type="text" name="username" placeholder="Username" required style="width:25%; font-size:11px; margin-bottom:0; color:black;">
+            <input type="password" name="password" placeholder="Password" required style="width:25%; font-size:11px; margin-bottom:0; color:black;">
+            <select name="can_delete" style="width:25%; font-size:11px; margin-bottom:0; color:black;">
+                <option value="false">Read/Write Only</option>
+                <option value="true">Full File Deletion</option>
+            </select>
+            <button type="submit" class="action-btn" style="padding:2px 8px;">Provision</button>
+        </form>
+        <table class="admin-table">
+            <thead><tr><th>User Client</th><th>Privilege</th><th>Action</th></tr></thead>
+            <tbody>
+                {% if full_db %}
+                    {% for user, data in full_db.items() %}
+                    {% if data.role != 'admin' %}
+                    <tr id="row-user-{{ user }}">
+                        <td><strong>{{ user }}</strong></td>
+                        <td>{{ 'Full File Deletion' if data.can_delete else 'Read/Write Only' }}</td>
+                        <td><button class="delete-action-btn" onclick="deleteUserAccount('{{ user }}')">❌ Remove</button></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<!-- WINDOW 3: USER SETTINGS SHIELD SYSTEM -->
+<div class="xp-window" id="settingsWindow" style="width:280px; height:180px;">
+    <div class="window-header">
+        <span>Account Password Settings</span>
+        <div class="close-btn" onclick="closeWindow('settingsWindow')">X</div>
+    </div>
+    <div class="window-body">
+        <label>Configure New Security Password:</label>
+        <input type="password" id="newPasswordInput" placeholder="Enter password text" style="color: black; margin-top:5px;">
+        <button type="button" class="action-btn" onclick="commitPasswordUpdate()" style="margin-top:10px;">💾 Commit Update</button>
+    </div>
+</div>

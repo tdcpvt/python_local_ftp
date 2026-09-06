@@ -1,0 +1,68 @@
+================================================================================
+PROJECT LOG SPECIFICATION: LFT SERVER LOCAL FTP WEB INTERFACE DASHBOARD
+================================================================================
+Target System Context: Android Platform / Termux Terminal Environment (Isolated Sandbox)
+Active Base Directory: /data/data/com.termux/files/home/ftp_local/
+Active Execution Host Location: http://100.78.2.78:5000 (LAN broadcast via mDNS)
+Current Project Phase: Corporate Identity Integration / Complete Modular Architecture
+Brand Affiliation Signature: Tech Day's Communication
+Date Profile: September 2026
+
+--------------------------------------------------------------------------------
+1. PROJECT CONCEPT & GOALS
+--------------------------------------------------------------------------------
+A custom, multi-threaded local application running inside a Termux container that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer. 
+
+The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers.
+
+--------------------------------------------------------------------------------
+2. CURRENT WORKSPACE ARCHITECTURE GRAPH
+--------------------------------------------------------------------------------
+📂 ftp_local/
+ ├── app.py                      # Main unified server engine script
+ ├── upload_handler.py           # Standalone decoupled secure file validation module
+ ├── requirements.txt            # System component dependencies inventory map
+ ├── users_db.json               # Persistent structural JSON data catalog database
+ ├── summary.txt                 # Project context anchor file (this document)
+ ├── ftp_root/                   # Server disk space root storage context matrix
+ │    ├── admin/                 # Default master account workspace directories
+ │    ├── alex/                  # Shared client container folder structure
+ │    │    ├── Public/           # Global open read/write cross-access target folder
+ │    │    └── Private/          # Restricted isolated client storage folder
+ │    └── jordan/                
+ └── templates/                  # Flask view compilation blueprint container
+      ├── login.html             # Rebranded LFT Server Login with inline logo & local error catcher
+      ├── desktop.html           # Main lightweight desktop skeleton blueprint
+      └── includes/              # Split template modules directory partition
+           ├── style.css         # High-priority layer styling and mobile taskbar layouts sheet
+           ├── windows.html      # Structural layout popups dashboard explorer frames
+           ├── scripts.js        # Core file manager, quota math, and drop-zone loops script
+           ├── start_menu.html   # Isolated standalone Taskbar and Start Menu layout
+           └── start_trigger.js  # Dedicated touch-priority input event trigger script
+
+--------------------------------------------------------------------------------
+3. INVENTORY SYSTEM PERMISSION MATRIX RULES
+--------------------------------------------------------------------------------
+* Universal Cross-Access Matrix: Any verified user client connected across the local network can open, read, explore, and upload files into any other client's 'Public' folder partition loop.
+* Private Directory Shield: Access to a 'Private' folder structure is strictly limited. Only the direct owner of that client profile account or the master 'admin' account can read or write data blocks within it. All cross-injections from unauthorized paths are explicitly blocked by an HTTP 403 error.
+* Granular Deletion Constraints: Normal users have standard read/write permissions. The ability to delete an uploaded file is controlled by a 'can_delete' boolean parameter inside the 'users' object block in 'users_db.json'. This flag can only be enabled or modified by the master admin profile.
+
+--------------------------------------------------------------------------------
+4. ACTIVE SYSTEM COMPONENT IMPLEMENTATIONS
+--------------------------------------------------------------------------------
+* Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text.
+* Zero-Dependency Inline Company Logo: Integrates the company green round boat/wave emblem as a high-fidelity inline SVG component, eliminating external network dependencies and broken image icons.
+* In-Page Asynchronous Login Validator: Upgraded the login pipeline via Fetch API to intercept wrong user entries, rendering an authentic warning alert box block ("Invalid username or password.") right on the canvas, eliminating redirection drops to blank error sheets.
+* Decoupled Upload Engine Processor: File evaluation is offloaded out of the main server stream to `upload_handler.py`. It securely verifies extensions against whitelist schemas before initiating real file transfers to disk.
+* Extensible Extension Whitelist: Supports deep structural checking for exact required file types: jpeg, jpg, png, doc, docx, xls, xlsx, ppt, pptx, pdf, txt, zip. This filter profile is stored dynamically under the JSON configuration dictionary.
+* Isolated Touch-Priority Start Event: Bypasses Chrome Mobile's coordinate translation layer in "Desktop Site" mode by binding directly to the 'touchend' event loop within a modular macro file (`start_trigger.js`).
+* Live Disk Quota Monitor Bars: Displays a dynamic layout progress bar mapping current total storage capacity metrics across the directory stack against an enforced limit boundary of 250 MB.
+
+--------------------------------------------------------------------------------
+5. RESOLVED SYSTEM ISSUES (TERMUX QUICK-CHECKS)
+--------------------------------------------------------------------------------
+* Chrome Desktop Mode Taskbar Coordinate Offset: Patched click failures on emulated wider displays by shifting the Start Menu popup wrapper to absolute fixed coordinates (`position: fixed !important; bottom: 42px !important;`) pushing cleanly upwards over the taskbar elements.
+* False-Failure JSON Parser Crash: Patched an upload bug where standard success flags triggered error popups due to unparsed plain text streams by implementing structured JSON data returns across endpoint responses.
+* Missing name="file" Attributes: Resolved an upload dropout bug by explicitly binding the 'name="file"' parameters into the HTML input forms, allowing Flask to bind files correctly to disk.
+* Suspended Background Port Lock (PID 19457): Patched port occupancy bugs by tracing lingering Python execution variables using clean `ps aux` command filters and running direct termination (`kill -9 PID`) calls.
+================================================================================
