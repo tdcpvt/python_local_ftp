@@ -1,17 +1,17 @@
 ================================================================================
 PROJECT LOG SPECIFICATION: LFT SERVER LOCAL FTP WEB INTERFACE DASHBOARD
 ================================================================================
-Target System Context: Android Platform / Termux Terminal Environment (Isolated Sandbox)
-Active Base Directory: /data/data/com.termux/files/home/ftp_local/
-Active Execution Host Location: http://100.78.2.78:5000 (LAN broadcast via mDNS)
-Current Project Phase: Corporate Identity Integration / Complete Modular Architecture
+Target System Context: Cross-Platform Deployment / Mobile & Desktop Compatible Sandbox
+Active Base Directory: /data/data/com.termux/files/home/ftp_local/ (or desktop path equivalent)
+Active Execution Host Location: http://100.78.2.78 (Dynamic free_port range 5000-5010)
+Current Project Phase: Production Ready / Modular UI and Dynamic Network Tools Live
 Brand Affiliation Signature: Tech Day's Communication
 Date Profile: September 2026
 
 --------------------------------------------------------------------------------
 1. PROJECT CONCEPT & GOALS
 --------------------------------------------------------------------------------
-A custom, multi-threaded local application running inside a Termux container that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer. 
+A custom, multi-threaded local application running inside a Termux container or desktop machine that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer. 
 
 The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers.
 
@@ -21,9 +21,11 @@ The entire visual user interface is designed to meticulously replicate the class
 📂 ftp_local/
  ├── app.py                      # Main unified server engine script
  ├── upload_handler.py           # Standalone decoupled secure file validation module
+ ├── network_admin.py            # Standalone modular port scanner & mDNS rebind processor
  ├── requirements.txt            # System component dependencies inventory map
  ├── users_db.json               # Persistent structural JSON data catalog database
  ├── summary.txt                 # Project context anchor file (this document)
+ ├── .gitignore                  # Security block filter keeping storage out of tracking tracks
  ├── ftp_root/                   # Server disk space root storage context matrix
  │    ├── admin/                 # Default master account workspace directories
  │    ├── alex/                  # Shared client container folder structure
@@ -50,6 +52,8 @@ The entire visual user interface is designed to meticulously replicate the class
 --------------------------------------------------------------------------------
 4. ACTIVE SYSTEM COMPONENT IMPLEMENTATIONS
 --------------------------------------------------------------------------------
+* Dynamic Network Admin Tools Window: Implemented a decoupled router (`network_admin.py`) and a 4th Windows XP popup layout block allowing the master administrator to run real-time local port scans (`free_port` range 5000-5020) and rebind the system mDNS domain loop on the fly.
+* Resolved Master Admin Permissions: Overrode rigid folder isolation checks inside the explorer route parameters (`app.py`), allowing administrators to smoothly enter and read both Public and Private directories across user accounts.
 * Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text.
 * Zero-Dependency Inline Company Logo: Integrates the company green round boat/wave emblem as a high-fidelity inline SVG component, eliminating external network dependencies and broken image icons.
 * In-Page Asynchronous Login Validator: Upgraded the login pipeline via Fetch API to intercept wrong user entries, rendering an authentic warning alert box block ("Invalid username or password.") right on the canvas, eliminating redirection drops to blank error sheets.
@@ -61,6 +65,7 @@ The entire visual user interface is designed to meticulously replicate the class
 --------------------------------------------------------------------------------
 5. RESOLVED SYSTEM ISSUES (TERMUX QUICK-CHECKS)
 --------------------------------------------------------------------------------
+* Desktop mDNS Tuple String Splitting Crash: Resolved a data-type layout crash by forcing the `get_local_ip()` socket hook to extract purely the string slice (index 0), filtering out arbitrary tuple port structures.
 * Chrome Desktop Mode Taskbar Coordinate Offset: Patched click failures on emulated wider displays by shifting the Start Menu popup wrapper to absolute fixed coordinates (`position: fixed !important; bottom: 42px !important;`) pushing cleanly upwards over the taskbar elements.
 * False-Failure JSON Parser Crash: Patched an upload bug where standard success flags triggered error popups due to unparsed plain text streams by implementing structured JSON data returns across endpoint responses.
 * Missing name="file" Attributes: Resolved an upload dropout bug by explicitly binding the 'name="file"' parameters into the HTML input forms, allowing Flask to bind files correctly to disk.
