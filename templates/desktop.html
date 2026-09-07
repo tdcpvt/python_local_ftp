@@ -18,9 +18,16 @@
             </div>
             <div>Admin Tools</div>
         </div>
+        <div class="icon" onclick="openNetworkConfigManager()">
+            <div class="icon-img">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#1b5e20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <div>Network Tools</div>
+        </div>
         {% endif %}
         
         {% for client in clients %}
+
         <div class="icon" onclick="openExplorer('{{ client }}')">
             <div class="icon-img">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="#0054e3"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>

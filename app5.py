@@ -12,6 +12,7 @@ import upload_handler
 
 # --- INTEGRATED CUSTOM CLASSES AND PORT UTILITIES ---
 
+
 class LocalNameAdvertisement:
     """Advertise a chosen .local name while this computer is running."""
     def __init__(self, name: str, ip: str, port: int) -> None:
@@ -147,20 +148,38 @@ def logout():
 
 @app.route('/api/explore/<target_user>/<folder_type>')
 def explore_folder(target_user, folder_type):
-    if 'username' not in session: return jsonify({"error": "Unauthorized"}), 401
+    if 'username' not in session: 
+        return jsonify({"error": "Unauthorized"}), 401
+    
     current_user = session['username']
-    if folder_type == "Private" and current_user != target_user and session.get('role') != 'admin':
-        return jsonify({"error": "Access Denied"}), 403
+    current_role = session.get('role')
+    
+    # --- FIXED SECURITY PERMISSION MATRIX ---
+    # Public folders are ALWAYS open to everyone.
+    # Private folders are open ONLY to the owner OR the master admin.
+    if folder_type == "Private":
+        if current_user != target_user and current_role != 'admin':
+            return jsonify({"error": "Access Denied"}), 403
+
     db = load_db()
     user_permissions = db["users"].get(current_user, {"can_delete": False})
+    
+    # Ensure physical tracking directories exist safely before reading data tracks
+    target_path = os.path.join(BASE_STORAGE, target_user, folder_type)
+    if not os.path.exists(target_path):
+        os.makedirs(target_path, exist_ok=True)
+
     matched_files = []
     for f in db["file_registry"]:
         if f["target_user"] == target_user and f["folder_type"] == folder_type:
-            if os.path.exists(os.path.join(BASE_STORAGE, target_user, folder_type, f["name"])):
+            if os.path.exists(os.path.join(target_path, f["name"])):
                 matched_files.append({
-                    "name": f["name"], "size": f["size"], "uploaded_by": f["uploaded_by"],
-                    "timestamp": f["timestamp"], "remark": f["remark"],
-                    "allow_delete": user_permissions.get("can_delete", False) or session.get('role') == 'admin'
+                    "name": f["name"], 
+                    "size": f["size"], 
+                    "uploaded_by": f["uploaded_by"],
+                    "timestamp": f["timestamp"], 
+                    "remark": f["remark"],
+                    "allow_delete": user_permissions.get("can_delete", False) or current_role == 'admin'
                 })
     return jsonify({"files": matched_files})
 
@@ -245,6 +264,12 @@ def change_password():
         save_db(db)
         return jsonify({"status": "success"})
     return "Error updating record", 400
+
+# --- REGISTER NETWORK ADMIN UTILITIES EXTENSION MODULE ---
+import network_admin
+network_admin.register_network_routes(app, load_db, save_db, get_local_ip, LocalNameAdvertisement)
+
+
 
 if __name__ == '__main__':
     HOST_INTERFACE = "0.0.0.0"

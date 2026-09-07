@@ -102,3 +102,34 @@
         <button type="button" class="action-btn" onclick="commitPasswordUpdate()" style="margin-top:10px;">💾 Commit Update</button>
     </div>
 </div>
+
+
+
+<!-- WINDOW 4: NETWORK BROADCAST CONFIGURATION MANAGER (ADMIN ONLY) -->
+{% if role == 'admin' %}
+<div class="xp-window" id="networkConfigWindow" style="width:340px; height:240px; left:40%; top:20%;">
+    <div class="window-header">
+        <span>mDNS Broadcast Configuration Manager</span>
+        <div class="close-btn" onclick="closeWindow('networkConfigWindow')">X</div>
+    </div>
+    <div class="window-body">
+        <form id="networkRebindForm" onsubmit="commitNetworkRebind(event)" style="background:#e4e2d5; padding:8px; border:1px solid #b5b2a1; font-size:11px;">
+            <div style="margin-bottom:6px;"><strong style="color:black;">Current State:</strong> <span id="netStatusTextLabel" style="color:#0054e3; font-weight:bold;">Loading...</span></div>
+            
+            <label>Custom Dynamic DNS Domain Name:</label>
+            <div style="display:flex; align-items:center; gap:2px; margin-bottom:6px;">
+                <input type="text" id="inputNetDns" required style="width:60%; margin-bottom:0; color:black;">
+                <strong style="color:black; font-size:12px;">.local</strong>
+            </div>
+
+            <label>Select Unoccupied System Target Port:</label>
+            <select id="selectNetPort" style="width:94%; color:black; background:white; margin-bottom:10px;">
+                <option value="">Querying available network sockets...</option>
+            </select>
+
+            <button type="submit" class="action-btn">⚡ Rebind Broadcast</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+

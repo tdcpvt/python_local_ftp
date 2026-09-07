@@ -138,3 +138,64 @@ if (dropZone) {
         executeAsynchronousUploadPipeline(files[0], remark);
     }, false);
 }
+
+
+// --- DYNAMIC NETWORK BROADCAST CONFIGURATION PROCESS ENGINE ---
+function openNetworkConfigManager() {
+    let statusLabel = document.getElementById('netStatusTextLabel');
+    let dnsInput = document.getElementById('inputNetDns');
+    let portSelect = document.getElementById('selectNetPort');
+    
+    if(!statusLabel || !dnsInput || !portSelect) return;
+    
+    statusLabel.innerText = "Querying interface bindings...";
+    openWindow('networkConfigWindow');
+    
+    fetch('/api/network/status')
+        .then(res => res.json())
+        .then(data => {
+            statusLabel.innerText = `${data.current_dns}.local:${data.current_port}`;
+            dnsInput.value = data.current_dns;
+            
+            // Recompile the drop-down listing only unoccupied socket indices
+            portSelect.innerHTML = "";
+            data.available_ports.forEach(p => {
+                let opt = document.createElement('option');
+                opt.value = p;
+                opt.innerText = `Port ${p} (Available Free Socket)`;
+                if(p == data.current_port) opt.selected = true;
+                portSelect.appendChild(opt);
+            });
+            if(data.available_ports.length === 0) {
+                portSelect.innerHTML = `<option value="">No alternative open ports found inside bounds.</option>`;
+            }
+        })
+        .catch(err => { statusLabel.innerText = "Error pulling system status profiles."; });
+}
+
+function commitNetworkRebind(e) {
+    e.preventDefault();
+    let dns = document.getElementById('inputNetDns').value;
+    let port = document.getElementById('selectNetPort').value;
+    if(!dns || !port) return alert("All configuration parameters require initialization tokens.");
+
+    if(!confirm(`Are you certain you want to rebind the network mDNS broadcast layer onto http://${dns}.local:${port}?`)) return;
+
+    let formData = new FormData();
+    formData.append('dns_name', dns);
+    formData.append('target_port', port);
+
+    fetch('/api/network/rebind', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => {
+            if(data.error) { alert("⚠️ " + data.error); }
+            else {
+                alert(`🎉 mDNS Network Broadcast successfully reconfigured!\nDomain updated: http://${data.dns}.local:${data.port}`);
+                closeWindow('networkConfigWindow');
+                window.location.reload(); // Refresh viewport tracking loops smoothly
+            }
+        })
+        .catch(err => alert("Error dispatching transaction parameters. Check admin privilege nodes."));
+}
+
+
