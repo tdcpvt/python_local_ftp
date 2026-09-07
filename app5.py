@@ -1,11 +1,54 @@
+
 import os
 import json
-import datetime
 import threading
 import socket
 import werkzeug
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
+from zeroconf import ServiceInfo, Zeroconf
 
+# IMPORT THE NEW SEPARATE SECURE UPLOAD EXTENSION MODULE
+import upload_handler
+
+# --- INTEGRATED CUSTOM CLASSES AND PORT UTILITIES ---
+
+class LocalNameAdvertisement:
+    """Advertise a chosen .local name while this computer is running."""
+    def __init__(self, name: str, ip: str, port: int) -> None:
+        self.zeroconf = Zeroconf()
+        self.info: ServiceInfo | None = None
+        self.assign(name, ip, port)
+
+    def assign(self, name: str, ip: str, port: int) -> None:
+        if self.info:
+            self.zeroconf.unregister_service(self.info)
+        local_host = f"{name}.local."
+        self.info = ServiceInfo(
+            "_http._tcp.local.", f"{name}._http._tcp.local.",
+            addresses=[socket.inet_aton(ip)], port=port,
+            properties={b"path": b"/"}, server=local_host,
+        )
+        self.zeroconf.register_service(self.info)
+
+    def close(self) -> None:
+        if self.info: 
+            self.zeroconf.unregister_service(self.info)
+        self.zeroconf.close()
+
+
+def free_port(host: str, start: int, end: int) -> int:
+    for port in range(start, end + 1):
+        probe = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            probe.bind((host, port))
+            return port
+        except OSError:
+            continue
+        finally:
+            probe.close()
+    raise RuntimeError(f"No unused port found in {start}-{end}.")
+
+# --- APP CONFIGURATION SETUP MATRICES ---
 app = Flask(__name__)
 app.secret_key = 'xp_sp2_retro_secret'
 
@@ -18,9 +61,11 @@ def load_db():
         default_db = {
             "users": {
                 "admin": {"password": "password123", "role": "admin", "can_delete": True},
-                "Hear_clerk": {"password": "pass", "role": "client", "can_delete": False},
-                "Accountant": {"password": "pass", "role": "client", "can_delete": True},
-                
+                "alex": {"password": "pass", "role": "client", "can_delete": False},
+                "jordan": {"password": "pass", "role": "client", "can_delete": True}
+            },
+            "settings": {
+                "allowed_extensions": list(upload_handler.get_flattened_defaults())
             },
             "file_registry": []
         }
@@ -30,11 +75,11 @@ def load_db():
     with open(DB_FILE, 'r') as f:
         try:
             data = json.load(f)
-            if "file_registry" not in data:
-                data["file_registry"] = []
+            if "file_registry" not in data: data["file_registry"] = []
+            if "settings" not in data: data["settings"] = {"allowed_extensions": list(upload_handler.get_flattened_defaults())}
             return data
         except Exception:
-            return {"users": {"admin": {"password": "password123", "role": "admin", "can_delete": True}}, "file_registry": []}
+            return {"users": {"admin": {"password": "password123", "role": "admin", "can_delete": True}}, "settings": {"allowed_extensions": list(upload_handler.get_flattened_defaults())}, "file_registry": []}
 
 def save_db(db):
     with open(DB_FILE, 'w') as f:
@@ -44,22 +89,32 @@ def get_dir_size(path):
     total = 0
     try:
         for entry in os.scandir(path):
-            if entry.is_file():
-                total += entry.stat().st_size
-            elif entry.is_dir():
-                total += get_dir_size(entry.path)
-    except Exception:
-        pass
+            if entry.is_file(): total += entry.stat().st_size
+            elif entry.is_dir(): total += get_dir_size(entry.path)
+    except Exception: pass
     return total
 
-# Initialize storage framework rules
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(('8.8.8.8', 1))
+        ip = s.getsockname()[0]  # <-- FIXED: Added [0] to extract only the string IP address
+    except Exception:
+        ip = '127.0.0.1'
+    finally:
+        s.close()
+    return ip
+
+
+
+# Initialize database mapping profiles
 db_init = load_db()
 for user in db_init["users"]:
     if db_init["users"][user]["role"] == "client":
         os.makedirs(os.path.join(BASE_STORAGE, user, "Public"), exist_ok=True)
-        os.makedirs(os.path.join(user_root := os.path.join(BASE_STORAGE, user), "Private"), exist_ok=True)
+        os.makedirs(os.path.join(BASE_STORAGE, user, "Private"), exist_ok=True)
 
-# --- FLASK WEB PANEL ROUTES ---
+# --- FLASK WEB ROUTING HANDLERS ---
 @app.route('/')
 def index():
     if 'username' in session: return redirect(url_for('desktop'))
@@ -81,11 +136,8 @@ def desktop():
     if 'username' not in session: return redirect(url_for('index'))
     db = load_db()
     clients = [u for u, info in db["users"].items() if info['role'] == 'client']
-    
-    # Calculate Live Storage Quota Metrics
     used_bytes = get_dir_size(BASE_STORAGE)
     used_mb = round(used_bytes / (1024 * 1024), 2)
-    
     return render_template('desktop.html', username=session['username'], role=session.get('role'), clients=clients, full_db=db["users"], used_mb=used_mb)
 
 @app.route('/logout')
@@ -93,93 +145,63 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-# --- WEB DATA TRANSMISSION MODULE ENDPOINTS ---
 @app.route('/api/explore/<target_user>/<folder_type>')
 def explore_folder(target_user, folder_type):
     if 'username' not in session: return jsonify({"error": "Unauthorized"}), 401
     current_user = session['username']
-    
     if folder_type == "Private" and current_user != target_user and session.get('role') != 'admin':
         return jsonify({"error": "Access Denied"}), 403
-
     db = load_db()
     user_permissions = db["users"].get(current_user, {"can_delete": False})
-    
-    # Filter the registry metadata arrays matching targeted workspace criteria
     matched_files = []
     for f in db["file_registry"]:
         if f["target_user"] == target_user and f["folder_type"] == folder_type:
-            file_path = os.path.join(BASE_STORAGE, target_user, folder_type, f["name"])
-            if os.path.exists(file_path):
+            if os.path.exists(os.path.join(BASE_STORAGE, target_user, folder_type, f["name"])):
                 matched_files.append({
-                    "name": f["name"],
-                    "size": f["size"],
-                    "uploaded_by": f["uploaded_by"],
-                    "timestamp": f["timestamp"],
-                    "remark": f["remark"],
+                    "name": f["name"], "size": f["size"], "uploaded_by": f["uploaded_by"],
+                    "timestamp": f["timestamp"], "remark": f["remark"],
                     "allow_delete": user_permissions.get("can_delete", False) or session.get('role') == 'admin'
                 })
     return jsonify({"files": matched_files})
 
+
 @app.route('/api/upload/<target_user>/<folder_type>', methods=['POST'])
 def upload_file(target_user, folder_type):
-    if 'username' not in session: return "Unauthorized", 401
+    if 'username' not in session: return jsonify({"error": "Unauthorized"}), 401
     current_user = session['username']
-    
-    if folder_type == "Private" and current_user != target_user and session.get('role') != 'admin':
-        return "Access Denied", 403
-
-    if 'file' not in request.files: return "No file parameter tracking data", 400
+    if 'file' not in request.files: return jsonify({"error": "No file found"}), 400
     file = request.files['file']
-    if file.filename == '': return "No selected items matching standard targets", 400
-
-    remark = request.form.get('remark', 'No remark provided.').strip()
-    if not remark: remark = "No remark provided."
-
-    target_path = os.path.join(BASE_STORAGE, target_user, folder_type)
-    filename = werkzeug.utils.secure_filename(file.filename)
-    dest_path = os.path.join(target_path, filename)
-    
-    file.save(dest_path)
-    
-    # Commit execution meta tags directly to data database loops
+    remark = request.form.get('remark', 'No remark provided.')
     db = load_db()
-    # Remove existing entries if file gets overwritten to keep entries distinct
-    db["file_registry"] = [x for x in db["file_registry"] if not (x["name"] == filename and x["target_user"] == target_user and x["folder_type"] == folder_type)]
-    
-    db["file_registry"].append({
-        "name": filename,
-        "target_user": target_user,
-        "folder_type": folder_type,
-        "size": os.path.getsize(dest_path),
-        "uploaded_by": current_user,
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "remark": remark
-    })
+
+    success, result = upload_handler.process_file_upload(
+        file=file, target_user=target_user, folder_type=folder_type,
+        current_user=current_user, remark=remark, base_storage_path=BASE_STORAGE, db_config=db
+    )
+    if not success: return jsonify({"error": result}), 400
+
+    db["file_registry"] = [x for x in db["file_registry"] if not (x["name"] == result["name"] and x["target_user"] == target_user and x["folder_type"] == folder_type)]
+    db["file_registry"].append(result)
     save_db(db)
-    return redirect(url_for('desktop'))
+    return jsonify({"status": "success", "filename": result["name"]})
 
 @app.route('/api/delete_file', methods=['POST'])
 def delete_file():
     if 'username' not in session: return "Unauthorized", 401
     current_user = session['username']
     db = load_db()
-    
     if session.get('role') != 'admin' and not db["users"].get(current_user, {}).get("can_delete", False):
         return "Access Forbidden", 403
-        
     target_user = request.form.get('target_user')
     folder_type = request.form.get('folder_type')
     filename = request.form.get('filename')
-    
     file_path = os.path.abspath(os.path.join(BASE_STORAGE, target_user, folder_type, werkzeug.utils.secure_filename(filename)))
     if file_path.startswith(BASE_STORAGE) and os.path.exists(file_path):
         os.remove(file_path)
-        # Purge indexing records 
         db["file_registry"] = [x for x in db["file_registry"] if not (x["name"] == filename and x["target_user"] == target_user and x["folder_type"] == folder_type)]
         save_db(db)
         return jsonify({"status": "deleted"})
-    return "Invalid targeted transaction path tracking parameters", 400
+    return "Invalid path", 400
 
 @app.route('/api/download/<target_user>/<folder_type>/<filename>')
 def download_file(target_user, folder_type, filename):
@@ -195,7 +217,6 @@ def create_user():
     username = request.form.get('username').strip().lower()
     password = request.form.get('password')
     can_delete = request.form.get('can_delete') == 'true'
-    
     db = load_db()
     db["users"][username] = {"password": password, "role": "client", "can_delete": can_delete}
     save_db(db)
@@ -211,7 +232,7 @@ def delete_user(username):
         del db["users"][username]
         save_db(db)
         return jsonify({"status": "user_removed"})
-    return "Invalid tracking target", 400
+    return "Invalid user", 400
 
 @app.route('/api/change_password', methods=['POST'])
 def change_password():
@@ -223,7 +244,26 @@ def change_password():
         db["users"][current_user]['password'] = new_password
         save_db(db)
         return jsonify({"status": "success"})
-    return "Error processing user password updates", 400
+    return "Error updating record", 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    HOST_INTERFACE = "0.0.0.0"
+    RUNTIME_PORT = free_port(HOST_INTERFACE, 5000, 5010)
+
+    LOCAL_IP_STR = get_local_ip()
+    advertiser = LocalNameAdvertisement(name="officeserver", ip=LOCAL_IP_STR, port=RUNTIME_PORT)
+
+    print(f"\n=========================================")
+    print(f"📡 [mDNS BROADCASTER] Active and Online!")
+    print(f"👉 Target Domain: http://officeserver.local:{RUNTIME_PORT}")
+    print(f"👉 Local IP Path: http://{LOCAL_IP_STR}:{RUNTIME_PORT}")
+    print(f"=========================================\n")
+
+    try:
+        app.run(host=HOST_INTERFACE, port=RUNTIME_PORT)
+    finally:
+        # Graceful exit executing the cleanup sequence
+        advertiser.close()
+
+
+
