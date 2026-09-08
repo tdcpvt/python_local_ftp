@@ -22,8 +22,10 @@ The entire visual user interface is designed to meticulously replicate the class
  ├── app.py                      # Main unified server engine script
  ├── upload_handler.py           # Standalone decoupled secure file validation module
  ├── network_admin.py            # Standalone modular port scanner & mDNS rebind processor
+ ├── notes_handler.py            # Standalone express messaging & notes router module
  ├── requirements.txt            # System component dependencies inventory map
  ├── users_db.json               # Persistent structural JSON data catalog database
+ ├── notes_db.json               # Persistent storage database for user messaging notes
  ├── summary.txt                 # Project context anchor file (this document)
  ├── .gitignore                  # Security block filter keeping storage out of tracking tracks
  ├── ftp_root/                   # Server disk space root storage context matrix
@@ -38,6 +40,7 @@ The entire visual user interface is designed to meticulously replicate the class
       └── includes/              # Split template modules directory partition
            ├── style.css         # High-priority layer styling and mobile taskbar layouts sheet
            ├── windows.html      # Structural layout popups dashboard explorer frames
+           ├── notes_window.html # Decoupled Express Messaging & Notes XP window UI component
            ├── scripts.js        # Core file manager, quota math, and drop-zone loops script
            ├── start_menu.html   # Isolated standalone Taskbar and Start Menu layout
            └── start_trigger.js  # Dedicated touch-priority input event trigger script
@@ -48,10 +51,12 @@ The entire visual user interface is designed to meticulously replicate the class
 * Universal Cross-Access Matrix: Any verified user client connected across the local network can open, read, explore, and upload files into any other client's 'Public' folder partition loop.
 * Private Directory Shield: Access to a 'Private' folder structure is strictly limited. Only the direct owner of that client profile account or the master 'admin' account can read or write data blocks within it. All cross-injections from unauthorized paths are explicitly blocked by an HTTP 403 error.
 * Granular Deletion Constraints: Normal users have standard read/write permissions. The ability to delete an uploaded file is controlled by a 'can_delete' boolean parameter inside the 'users' object block in 'users_db.json'. This flag can only be enabled or modified by the master admin profile.
+* Note & Message Isolation: Messages created via Express Notes are strictly isolated. Only the designated recipient can view the contents of a note. Senders and recipients are both granted permission to delete notes from their respective logs.
 
 --------------------------------------------------------------------------------
 4. ACTIVE SYSTEM COMPONENT IMPLEMENTATIONS
 --------------------------------------------------------------------------------
+* Decoupled Express Messaging & Notes System: Integrated `notes_handler.py` and `templates/includes/notes_window.html` featuring a taskbar mail shortcut (📫). Supports message drafting with priority flags ("Important", "Note", "Look At"), user-to-user recipient targeting, timestamp logging, and full deletion controls for both senders and receivers.
 * Dynamic Network Admin Tools Window: Implemented a decoupled router (`network_admin.py`) and a 4th Windows XP popup layout block allowing the master administrator to run real-time local port scans (`free_port` range 5000-5020) and rebind the system mDNS domain loop on the fly.
 * Resolved Master Admin Permissions: Overrode rigid folder isolation checks inside the explorer route parameters (`app.py`), allowing administrators to smoothly enter and read both Public and Private directories across user accounts.
 * Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text.
