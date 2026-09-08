@@ -1,0 +1,121 @@
+<!-- Mail / Notes XP Popup Window Container -->
+<div id="notes-window" class="xp-window" style="display: none; width: 480px; position: absolute; top: 100px; left: 150px; z-index: 1000;">
+  <div class="xp-window-header" style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(180deg, #0058ee, #388cfc); color: white; padding: 4px 8px; font-weight: bold;">
+    <span>📫 Express Messaging & Notes</span>
+    <button onclick="toggleNotesWindow()" style="background: #e81123; color: white; border: none; font-weight: bold; cursor: pointer;">X</button>
+  </div>
+  
+  <div class="xp-window-body" style="background: #ece9d8; padding: 10px; font-family: Tahoma, sans-serif; font-size: 12px;">
+    
+    <!-- Send Message Panel -->
+    <fieldset style="border: 1px solid #919b9c; padding: 8px; margin-bottom: 10px;">
+      <legend><strong>Send New Note</strong></legend>
+      <form id="notes-send-form" onsubmit="handleSendNote(event)">
+        <div style="margin-bottom: 5px;">
+          <label>To: </label>
+          <select id="note-recipient" name="recipient" required style="width: 150px;">
+            {% for client in clients %}
+              {% if client != username %}
+                <option value="{{ client }}">{{ client }}</option>
+              {% endif %}
+            {% endfor %}
+            {% if role != 'admin' %}
+              <option value="admin">admin</option>
+            {% endif %}
+          </select>
+
+          <label style="margin-left: 10px;">Flag: </label>
+          <select id="note-flag" name="flag" style="width: 100px;">
+            <option value="Important">Important</option>
+            <option value="Note" selected>Note</option>
+            <option value="Look At">Look At</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 5px;">
+          <textarea id="note-body" name="body" rows="3" style="width: 96%; resize: none;" placeholder="Type your message here..." required></textarea>
+        </div>
+
+        <button type="submit" style="padding: 2px 10px; cursor: pointer;">Send Note</button>
+      </form>
+    </fieldset>
+
+    <!-- Received Messages Inbox Panel -->
+    <fieldset style="border: 1px solid #919b9c; padding: 8px;">
+      <legend><strong>Your Received Messages</strong></legend>
+      <div id="notes-inbox-container" style="height: 180px; overflow-y: auto; background: white; border: 1px solid #7f9db9; padding: 5px;">
+        <p style="color: #666;">Loading messages...</p>
+      </div>
+    </fieldset>
+
+  </div>
+</div>
+
+<script>
+function toggleNotesWindow() {
+  const win = document.getElementById('notes-window');
+  if (win.style.display === 'none' || win.style.display === '') {
+    win.style.display = 'block';
+    fetchReceivedNotes();
+  } else {
+    win.style.display = 'none';
+  }
+}
+
+function fetchReceivedNotes() {
+  fetch('/api/notes/list')
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('notes-inbox-container');
+      if (!data.messages || data.messages.length === 0) {
+        container.innerHTML = '<p style="color: #666; margin: 0;">No messages received.</p>';
+        return;
+      }
+      
+      let html = '';
+      data.messages.reverse().forEach(msg => {
+        let flagColor = '#000';
+        if (msg.flag === 'Important') flagColor = '#d9534f';
+        if (msg.flag === 'Look At') flagColor = '#f0ad4e';
+
+        html += `
+          <div id="note-item-${msg.id}" style="border-bottom: 1px solid #ddd; padding: 6px 0; font-size: 11px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <strong>From: ${msg.sender}</strong>
+              <div>
+                <span style="color: ${flagColor}; font-weight: bold; border: 1px solid ${flagColor}; padding: 0 4px; border-radius: 3px;">[${msg.flag}]</span>
+                <button onclick="handleDeleteNote(${msg.id})" style="background: #e81123; color: white; border: none; font-size: 10px; cursor: pointer; margin-left: 5px; padding: 1px 4px;">Delete</button>
+              </div>
+            </div>
+            <div style="margin-bottom: 3px; white-space: pre-wrap;">${msg.body}</div>
+            <div style="color: #888; font-size: 10px; text-align: right;">${msg.timestamp}</div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById('notes-inbox-container').innerHTML = '<p style="color: red;">Failed to load messages.</p>';
+    });
+}
+
+function handleDeleteNote(msgId) {
+  if (!confirm("Are you sure you want to delete this note?")) return;
+
+  const formData = new FormData();
+  formData.append('msg_id', msgId);
+
+  fetch('/api/notes/delete', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 'success') {
+      fetchReceivedNotes(); // Reload list after deletion
+    } else {
+      alert('Error: ' + (data.error || 'Failed to delete note.'));
+    }
+  });
+}
+</script>

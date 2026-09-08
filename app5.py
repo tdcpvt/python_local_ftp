@@ -10,6 +10,7 @@ from zeroconf import ServiceInfo, Zeroconf
 # IMPORT THE NEW SEPARATE SECURE UPLOAD EXTENSION MODULE
 import upload_handler
 
+
 # --- INTEGRATED CUSTOM CLASSES AND PORT UTILITIES ---
 
 
@@ -268,7 +269,8 @@ def change_password():
 # --- REGISTER NETWORK ADMIN UTILITIES EXTENSION MODULE ---
 import network_admin
 network_admin.register_network_routes(app, load_db, save_db, get_local_ip, LocalNameAdvertisement)
-
+import notes_handler
+notes_handler.register_notes_routes(app, load_db)
 
 
 if __name__ == '__main__':
