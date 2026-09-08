@@ -6,6 +6,7 @@ __pycache__/
 
 # Ignore your persistent user database (Contains login text blocks & passwords)
 users_db.json
+note_db.josn
 
 # Ignore the actual stored client files and uploaded documents data root
 ftp_root/

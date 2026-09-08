@@ -13,7 +13,7 @@ Date Profile: September 2026
 --------------------------------------------------------------------------------
 A custom, multi-threaded local application running inside a Termux container or desktop machine that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer. 
 
-The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers.
+The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, interactive drag-and-drop window positioning, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers.
 
 --------------------------------------------------------------------------------
 2. CURRENT WORKSPACE ARCHITECTURE GRAPH
@@ -28,6 +28,8 @@ The entire visual user interface is designed to meticulously replicate the class
  ├── notes_db.json               # Persistent storage database for user messaging notes
  ├── summary.txt                 # Project context anchor file (this document)
  ├── .gitignore                  # Security block filter keeping storage out of tracking tracks
+ ├── static/                     # Web static asset distribution directory
+ │    └── desktop_drag.js        # Window title bar & desktop shortcut drag-and-drop engine
  ├── ftp_root/                   # Server disk space root storage context matrix
  │    ├── admin/                 # Default master account workspace directories
  │    ├── alex/                  # Shared client container folder structure
@@ -56,7 +58,8 @@ The entire visual user interface is designed to meticulously replicate the class
 --------------------------------------------------------------------------------
 4. ACTIVE SYSTEM COMPONENT IMPLEMENTATIONS
 --------------------------------------------------------------------------------
-* Decoupled Express Messaging & Notes System: Integrated `notes_handler.py` and `templates/includes/notes_window.html` featuring a taskbar mail shortcut (📫). Supports message drafting with priority flags ("Important", "Note", "Look At"), user-to-user recipient targeting, timestamp logging, and full deletion controls for both senders and receivers.
+* Desktop Drag & Drop Canvas Interface (`desktop_drag.js`): Integrated mouse and touch boundary-aware position controls allowing users to drag Windows XP popup frames by their title bars and freely rearrange desktop shortcut icons across the screen canvas.
+* Decoupled Express Messaging & Notes System: Integrated `notes_handler.py` and `templates/includes/notes_window.html` featuring a taskbar mail shortcut (📫) and desktop shortcut. Supports message drafting with priority flags ("Important", "Note", "Look At"), user-to-user recipient targeting, timestamp logging, and full deletion controls for both senders and receivers.
 * Dynamic Network Admin Tools Window: Implemented a decoupled router (`network_admin.py`) and a 4th Windows XP popup layout block allowing the master administrator to run real-time local port scans (`free_port` range 5000-5020) and rebind the system mDNS domain loop on the fly.
 * Resolved Master Admin Permissions: Overrode rigid folder isolation checks inside the explorer route parameters (`app.py`), allowing administrators to smoothly enter and read both Public and Private directories across user accounts.
 * Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text.
@@ -70,6 +73,7 @@ The entire visual user interface is designed to meticulously replicate the class
 --------------------------------------------------------------------------------
 5. RESOLVED SYSTEM ISSUES (TERMUX QUICK-CHECKS)
 --------------------------------------------------------------------------------
+* Jinja TemplateNotFound Error for Drag Engine: Resolved HTTP 500 crash caused by evaluating `desktop_drag.js` with `{% include %}` inside `desktop.html`. Replaced with standard Flask static url loader tag `<script src="{{ url_for('static', filename='desktop_drag.js') }}"></script>`.
 * Desktop mDNS Tuple String Splitting Crash: Resolved a data-type layout crash by forcing the `get_local_ip()` socket hook to extract purely the string slice (index 0), filtering out arbitrary tuple port structures.
 * Chrome Desktop Mode Taskbar Coordinate Offset: Patched click failures on emulated wider displays by shifting the Start Menu popup wrapper to absolute fixed coordinates (`position: fixed !important; bottom: 42px !important;`) pushing cleanly upwards over the taskbar elements.
 * False-Failure JSON Parser Crash: Patched an upload bug where standard success flags triggered error popups due to unparsed plain text streams by implementing structured JSON data returns across endpoint responses.
