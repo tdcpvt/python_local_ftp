@@ -1,82 +1,88 @@
 ================================================================================
 PROJECT LOG SPECIFICATION: LFT SERVER LOCAL FTP WEB INTERFACE DASHBOARD
 ================================================================================
-Target System Context: Cross-Platform Deployment / Mobile & Desktop Compatible Sandbox
-Active Base Directory: /data/data/com.termux/files/home/ftp_local/ (or desktop path equivalent)
-Active Execution Host Location: http://100.78.2.78 (Dynamic free_port range 5000-5010)
-Current Project Phase: Production Ready / Modular UI and Dynamic Network Tools Live
-Brand Affiliation Signature: Tech Day's Communication
-Date Profile: September 2026
+Target System Context: Cross-Platform Deployment / Mobile & Desktop Compatible Sandbox[cite: 1]
+Active Base Directory: /data/data/com.termux/files/home/ftp_local/ (or desktop path equivalent)[cite: 1]
+Active Execution Host Location: http://100.78.2.78 (Dynamic free_port range 5000-5010)[cite: 1]
+Current Project Phase: Production Ready / Modular UI, Start Menu Grid & Auth Session Routes Live[cite: 1]
+Brand Affiliation Signature: Tech Day's Communication[cite: 1]
+Date Profile: September 2026[cite: 1]
 
 --------------------------------------------------------------------------------
 1. PROJECT CONCEPT & GOALS
 --------------------------------------------------------------------------------
-A custom, multi-threaded local application running inside a Termux container or desktop machine that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer. 
+A custom, multi-threaded local application running inside a Termux container or desktop machine that merges a Python Flask-driven Web Management Control Dashboard with an operational data layer[cite: 1]. 
 
-The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, interactive drag-and-drop window positioning, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers.
+The entire visual user interface is designed to meticulously replicate the classic desktop layout of Microsoft Windows XP Service Pack 2 (SP2), rebranded securely under the "LFT Server" identity system[cite: 1]. It features crisp silver-blue Luna bars, high-priority system taskbars, zero-dependency inline SVG vector icons, corporate logo elements, interactive drag-and-drop window positioning, and an in-page login validator loop to avoid rendering conflicts on standard and emulated mobile-desktop browsers[cite: 1].
 
 --------------------------------------------------------------------------------
 2. CURRENT WORKSPACE ARCHITECTURE GRAPH
 --------------------------------------------------------------------------------
 📂 ftp_local/
- ├── app.py                      # Main unified server engine script
- ├── upload_handler.py           # Standalone decoupled secure file validation module
- ├── network_admin.py            # Standalone modular port scanner & mDNS rebind processor
- ├── notes_handler.py            # Standalone express messaging & notes router module
- ├── requirements.txt            # System component dependencies inventory map
- ├── users_db.json               # Persistent structural JSON data catalog database
- ├── notes_db.json               # Persistent storage database for user messaging notes
- ├── summary.txt                 # Project context anchor file (this document)
- ├── .gitignore                  # Security block filter keeping storage out of tracking tracks
- ├── static/                     # Web static asset distribution directory
- │    └── desktop_drag.js        # Window title bar & desktop shortcut drag-and-drop engine
- ├── ftp_root/                   # Server disk space root storage context matrix
- │    ├── admin/                 # Default master account workspace directories
- │    ├── alex/                  # Shared client container folder structure
- │    │    ├── Public/           # Global open read/write cross-access target folder
- │    │    └── Private/          # Restricted isolated client storage folder
- │    └── jordan/                
- └── templates/                  # Flask view compilation blueprint container
-      ├── login.html             # Rebranded LFT Server Login with inline logo & local error catcher
-      ├── desktop.html           # Main lightweight desktop skeleton blueprint
-      └── includes/              # Split template modules directory partition
-           ├── style.css         # High-priority layer styling and mobile taskbar layouts sheet
-           ├── windows.html      # Structural layout popups dashboard explorer frames
-           ├── notes_window.html # Decoupled Express Messaging & Notes XP window UI component
-           ├── scripts.js        # Core file manager, quota math, and drop-zone loops script
-           ├── start_menu.html   # Isolated standalone Taskbar and Start Menu layout
-           └── start_trigger.js  # Dedicated touch-priority input event trigger script
+ ├── app.py                      # Main unified server engine script & session routes (/logout)[cite: 1]
+ ├── upload_handler.py           # Standalone decoupled secure file validation module[cite: 1]
+ ├── network_admin.py            # Standalone modular port scanner & mDNS rebind processor[cite: 1]
+ ├── notes_handler.py            # Standalone express messaging & notes router module[cite: 1]
+ ├── requirements.txt            # System component dependencies inventory map[cite: 1]
+ ├── users_db.json               # Persistent structural JSON data catalog database[cite: 1]
+ ├── notes_db.json               # Persistent storage database for user messaging notes[cite: 1]
+ ├── summary.txt                 # Project context anchor file (this document)[cite: 1]
+ ├── .gitignore                  # Security block filter keeping storage out of tracking tracks[cite: 1]
+ ├── static/                     # Web static asset distribution directory[cite: 1]
+ │    └── desktop_drag.js        # Window title bar & desktop shortcut drag-and-drop engine[cite: 1]
+ ├── ftp_root/                   # Server disk space root storage context matrix[cite: 1]
+ │    ├── admin/                 # Default master account workspace directories[cite: 1]
+ │    ├── alex/                  # Shared client container folder structure[cite: 1]
+ │    │    ├── Public/           # Global open read/write cross-access target folder[cite: 1]
+ │    │    └── Private/          # Restricted isolated client storage folder[cite: 1]
+ │    └── jordan/                [cite: 1]
+ └── templates/                  # Flask view compilation blueprint container[cite: 1]
+      ├── login.html             # Rebranded LFT Server Login with inline logo & local error catcher[cite: 1]
+      ├── desktop.html           # Desktop layout skeleton containing taskbar & fixed shortcuts[cite: 1]
+      └── includes/              # Split template modules directory partition[cite: 1]
+           ├── style.css         # High-priority layer styling, 3-column start grid & taskbar styles[cite: 1]
+           ├── windows.html      # Structural layout popups dashboard explorer frames[cite: 1]
+           ├── notes_window.html # Decoupled Express Messaging & Notes XP window UI component[cite: 1]
+           ├── scripts.js        # Core file manager, quota math, and handleLogout script[cite: 1]
+           ├── start_menu.html   # 3-column workstation grid layout with footer action buttons[cite: 1]
+           └── start_trigger.js  # Dedicated touch-priority input event trigger script[cite: 1]
 
 --------------------------------------------------------------------------------
 3. INVENTORY SYSTEM PERMISSION MATRIX RULES
 --------------------------------------------------------------------------------
-* Universal Cross-Access Matrix: Any verified user client connected across the local network can open, read, explore, and upload files into any other client's 'Public' folder partition loop.
-* Private Directory Shield: Access to a 'Private' folder structure is strictly limited. Only the direct owner of that client profile account or the master 'admin' account can read or write data blocks within it. All cross-injections from unauthorized paths are explicitly blocked by an HTTP 403 error.
-* Granular Deletion Constraints: Normal users have standard read/write permissions. The ability to delete an uploaded file is controlled by a 'can_delete' boolean parameter inside the 'users' object block in 'users_db.json'. This flag can only be enabled or modified by the master admin profile.
-* Note & Message Isolation: Messages created via Express Notes are strictly isolated. Only the designated recipient can view the contents of a note. Senders and recipients are both granted permission to delete notes from their respective logs.
+* Universal Cross-Access Matrix: Any verified user client connected across the local network can open, read, explore, and upload files into any other client's 'Public' folder partition loop[cite: 1].
+* Private Directory Shield: Access to a 'Private' folder structure is strictly limited[cite: 1]. Only the direct owner of that client profile account or the master 'admin' account can read or write data blocks within it[cite: 1]. All cross-injections from unauthorized paths are explicitly blocked by an HTTP 403 error[cite: 1].
+* Granular Deletion Constraints: Normal users have standard read/write permissions[cite: 1]. The ability to delete an uploaded file is controlled by a 'can_delete' boolean parameter inside the 'users' object block in 'users_db.json'[cite: 1]. This flag can only be enabled or modified by the master admin profile[cite: 1].
+* Note & Message Isolation: Messages created via Express Notes are strictly isolated[cite: 1]. Only the designated recipient can view the contents of a note[cite: 1]. Senders and recipients are both granted permission to delete notes from their respective logs[cite: 1].
 
 --------------------------------------------------------------------------------
 4. ACTIVE SYSTEM COMPONENT IMPLEMENTATIONS
 --------------------------------------------------------------------------------
-* Desktop Drag & Drop Canvas Interface (`desktop_drag.js`): Integrated mouse and touch boundary-aware position controls allowing users to drag Windows XP popup frames by their title bars and freely rearrange desktop shortcut icons across the screen canvas.
-* Decoupled Express Messaging & Notes System: Integrated `notes_handler.py` and `templates/includes/notes_window.html` featuring a taskbar mail shortcut (📫) and desktop shortcut. Supports message drafting with priority flags ("Important", "Note", "Look At"), user-to-user recipient targeting, timestamp logging, and full deletion controls for both senders and receivers.
-* Dynamic Network Admin Tools Window: Implemented a decoupled router (`network_admin.py`) and a 4th Windows XP popup layout block allowing the master administrator to run real-time local port scans (`free_port` range 5000-5020) and rebind the system mDNS domain loop on the fly.
-* Resolved Master Admin Permissions: Overrode rigid folder isolation checks inside the explorer route parameters (`app.py`), allowing administrators to smoothly enter and read both Public and Private directories across user accounts.
-* Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text.
-* Zero-Dependency Inline Company Logo: Integrates the company green round boat/wave emblem as a high-fidelity inline SVG component, eliminating external network dependencies and broken image icons.
-* In-Page Asynchronous Login Validator: Upgraded the login pipeline via Fetch API to intercept wrong user entries, rendering an authentic warning alert box block ("Invalid username or password.") right on the canvas, eliminating redirection drops to blank error sheets.
-* Decoupled Upload Engine Processor: File evaluation is offloaded out of the main server stream to `upload_handler.py`. It securely verifies extensions against whitelist schemas before initiating real file transfers to disk.
-* Extensible Extension Whitelist: Supports deep structural checking for exact required file types: jpeg, jpg, png, doc, docx, xls, xlsx, ppt, pptx, pdf, txt, zip. This filter profile is stored dynamically under the JSON configuration dictionary.
-* Isolated Touch-Priority Start Event: Bypasses Chrome Mobile's coordinate translation layer in "Desktop Site" mode by binding directly to the 'touchend' event loop within a modular macro file (`start_trigger.js`).
-* Live Disk Quota Monitor Bars: Displays a dynamic layout progress bar mapping current total storage capacity metrics across the directory stack against an enforced limit boundary of 250 MB.
+* Integrated 3-Column Start Menu Grid (`start_menu.html`): Migrated dynamic client workstation shortcuts off the main desktop screen into a organized 3-column x 5-row scrollable grid container inside the Start Menu layout.
+* Start Menu System Footer & Actions: Included a styled bottom action bar housing action triggers for "Change Password" and a red "Log Out" button with confirmation handling.
+* Server-Side Session Logout Engine (`/logout` in `app.py`): Built a backend authentication route that executes `session.clear()` to destroy stored session parameters before redirecting users back to the `login` view.
+* Fixed Taskbar & Dropup Alignment (`desktop.html` & `style.css`): Positioned the taskbar globally at the bottom of the canvas (`position: fixed; bottom: 0;`), placing the Start Menu dropup container directly on top (`bottom: 30px;`).
+* Desktop Drag & Drop Canvas Interface (`desktop_drag.js`): Integrated mouse and touch boundary-aware position controls allowing users to drag Windows XP popup frames by their title bars and freely rearrange desktop shortcut icons across the screen canvas[cite: 1].
+* Decoupled Express Messaging & Notes System: Integrated `notes_handler.py` and `templates/includes/notes_window.html` featuring a taskbar mail shortcut (📫) and desktop shortcut[cite: 1]. Supports message drafting with priority flags ("Important", "Note", "Look At"), user-to-user recipient targeting, timestamp logging, and full deletion controls for both senders and receivers[cite: 1].
+* Dynamic Network Admin Tools Window: Implemented a decoupled router (`network_admin.py`) and a 4th Windows XP popup layout block allowing the master administrator to run real-time local port scans (`free_port` range 5000-5020) and rebind the system mDNS domain loop on the fly[cite: 1].
+* Resolved Master Admin Permissions: Overrode rigid folder isolation checks inside the explorer route parameters (`app.py`), allowing administrators to smoothly enter and read both Public and Private directories across user accounts[cite: 1].
+* Rebranded LFT Server Logon Welcome Screen: Replaced Windows XP texts with "LFT Server" while maintaining retro design themes[cite: 1]. Features the signature label "Tech Day's Communication" pinned to the bottom-left corner in small 12px text[cite: 1].
+* Zero-Dependency Inline Company Logo: Integrates the company green round boat/wave emblem as a high-fidelity inline SVG component, eliminating external network dependencies and broken image icons[cite: 1].
+* In-Page Asynchronous Login Validator: Upgraded the login pipeline via Fetch API to intercept wrong user entries, rendering an authentic warning alert box block ("Invalid username or password.") right on the canvas, eliminating redirection drops to blank error sheets[cite: 1].
+* Decoupled Upload Engine Processor: File evaluation is offloaded out of the main server stream to `upload_handler.py`[cite: 1]. It securely verifies extensions against whitelist schemas before initiating real file transfers to disk[cite: 1].
+* Extensible Extension Whitelist: Supports deep structural checking for exact required file types: jpeg, jpg, png, doc, docx, xls, xlsx, ppt, pptx, pdf, txt, zip[cite: 1]. This filter profile is stored dynamically under the JSON configuration dictionary[cite: 1].
+* Isolated Touch-Priority Start Event: Bypasses Chrome Mobile's coordinate translation layer in "Desktop Site" mode by binding directly to the 'touchend' event loop within a modular macro file (`start_trigger.js`)[cite: 1].
+* Live Disk Quota Monitor Bars: Displays a dynamic layout progress bar mapping current total storage capacity metrics across the directory stack against an enforced limit boundary of 250 MB[cite: 1].
 
 --------------------------------------------------------------------------------
 5. RESOLVED SYSTEM ISSUES (TERMUX QUICK-CHECKS)
 --------------------------------------------------------------------------------
-* Jinja TemplateNotFound Error for Drag Engine: Resolved HTTP 500 crash caused by evaluating `desktop_drag.js` with `{% include %}` inside `desktop.html`. Replaced with standard Flask static url loader tag `<script src="{{ url_for('static', filename='desktop_drag.js') }}"></script>`.
-* Desktop mDNS Tuple String Splitting Crash: Resolved a data-type layout crash by forcing the `get_local_ip()` socket hook to extract purely the string slice (index 0), filtering out arbitrary tuple port structures.
-* Chrome Desktop Mode Taskbar Coordinate Offset: Patched click failures on emulated wider displays by shifting the Start Menu popup wrapper to absolute fixed coordinates (`position: fixed !important; bottom: 42px !important;`) pushing cleanly upwards over the taskbar elements.
-* False-Failure JSON Parser Crash: Patched an upload bug where standard success flags triggered error popups due to unparsed plain text streams by implementing structured JSON data returns across endpoint responses.
-* Missing name="file" Attributes: Resolved an upload dropout bug by explicitly binding the 'name="file"' parameters into the HTML input forms, allowing Flask to bind files correctly to disk.
-* Suspended Background Port Lock (PID 19457): Patched port occupancy bugs by tracing lingering Python execution variables using clean `ps aux` command filters and running direct termination (`kill -9 PID`) calls.
+* Missing Start Menu / Taskbar Visibility: Resolved missing web app Start Menu by defining fixed taskbar container blocks (`.taskbar`) and adjusting `startMenu` position offset values (`bottom: 30px; z-index: 10000;`).
+* Desktop Icon Overlap & Overflow: Resolved vertical screen clipping issues caused by dynamic client lists by migrating workstation icons to a 3-column structured grid within the Start Menu component.
+* Jinja TemplateNotFound Error for Drag Engine: Resolved HTTP 500 crash caused by evaluating `desktop_drag.js` with `{% include %}` inside `desktop.html`[cite: 1]. Replaced with standard Flask static url loader tag `<script src="{{ url_for('static', filename='desktop_drag.js') }}"></script>`[cite: 1].
+* Desktop mDNS Tuple String Splitting Crash: Resolved a data-type layout crash by forcing the `get_local_ip()` socket hook to extract purely the string slice (index 0), filtering out arbitrary tuple port structures[cite: 1].
+* Chrome Desktop Mode Taskbar Coordinate Offset: Patched click failures on emulated wider displays by shifting the Start Menu popup wrapper to absolute fixed coordinates (`position: fixed !important; bottom: 42px !important;`) pushing cleanly upwards over the taskbar elements[cite: 1].
+* False-Failure JSON Parser Crash: Patched an upload bug where standard success flags triggered error popups due to unparsed plain text streams by implementing structured JSON data returns across endpoint responses[cite: 1].
+* Missing name="file" Attributes: Resolved an upload dropout bug by explicitly binding the 'name="file"' parameters into the HTML input forms, allowing Flask to bind files correctly to disk[cite: 1].
+* Suspended Background Port Lock (PID 19457): Patched port occupancy bugs by tracing lingering Python execution variables using clean `ps aux` command filters and running direct termination (`kill -9 PID`) calls[cite: 1].
 ================================================================================

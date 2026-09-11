@@ -1,20 +1,27 @@
-<!-- STANDALONE DEFINITIVE TASKBAR CONFIGURATION -->
-<div class="taskbar">
-    <button class="start-btn" id="xpStartBtnNative">start</button>
-    <button onclick="toggleNotesWindow()" title="Open Express Notes" style="background: transparent; border: none; cursor: pointer; padding: 2px 6px; margin-right: auto;">
-    <span style="font-size: 24px;">📩</span>
-    </button>
-
-
-</div>
-
-<!-- STANDALONE POPUP START MENU -->
-<div class="start-menu" id="xpStartMenuPanel">
-    <div class="start-menu-header">👤 Session Account: {{ username }}</div>
-    <div class="start-menu-body">
-        <a href="#" class="start-menu-item" id="menuOptChangePass">⚙️ Change Account Password</a>
-        <a href="/logout" class="start-menu-item" style="background-color: #cc3333; color: white; font-weight: bold;">🔴 Log Off Local Host</a>
+<div id="startMenu" class="start-menu-container" style="display: none;">
+    <div class="start-menu-header">
+        <strong>Workstations Directory</strong>
     </div>
-    <!-- Mail / Notes Taskbar Shortcut -->
 
+    <!-- 3-Column Workstation Grid -->
+    <div class="start-menu-grid">
+        {% for client in clients %}
+        <div class="start-grid-item" onclick="openExplorer('{{ client }}'); toggleStartMenu();">
+            <div class="grid-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0054e3"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+            </div>
+            <span class="grid-label">{{ client }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- START MENU FOOTER: Password & Logout Actions -->
+    <div class="start-menu-footer">
+        <button class="start-footer-btn" onclick="openWindow('settingsWindow'); toggleStartMenu();">
+            <span>🔑 Change Password</span>
+        </button>
+        <button class="start-footer-btn logout-btn" onclick="handleLogout()">
+            <span>🔑 Log Out</span>
+        </button>
+    </div>
 </div>

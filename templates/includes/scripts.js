@@ -198,4 +198,56 @@ function commitNetworkRebind(e) {
         .catch(err => alert("Error dispatching transaction parameters. Check admin privilege nodes."));
 }
 
+function openEditUserModal(username, role, canDelete) {
+    // Fixed element ID target
+    const targetElem = document.getElementById('editTargetUsernameText') || document.getElementById('editTargetUsername');
+    if (targetElem) {
+        targetElem.innerText = username;
+    }
+    
+    document.getElementById('editUsernameInput').value = username;
+    document.getElementById('editPasswordInput').value = '';
+    document.getElementById('editRoleSelect').value = role;
+    document.getElementById('editCanDeleteCheck').checked = canDelete;
+    
+    document.getElementById('editUserModal').style.display = 'block';
+}
+
+function closeEditUserModal() {
+    document.getElementById('editUserModal').style.display = 'none';
+}
+
+function submitUserEdit(e) {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('target_user', document.getElementById('editUsernameInput').value);
+    formData.append('new_password', document.getElementById('editPasswordInput').value);
+    formData.append('new_role', document.getElementById('editRoleSelect').value);
+    formData.append('can_delete', document.getElementById('editCanDeleteCheck').checked);
+
+    fetch('/admin/edit_user', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        if (data.status === 'success') {
+            location.reload();
+        }
+    })
+    .catch(err => console.error('Error updating user:', err));
+}
+function toggleStartMenu() {
+    const menu = document.getElementById('startMenu');
+    if (menu) {
+        menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+    }
+}
+function handleLogout() {
+    if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "/logout"; // Adjust route to match your backend logout URL
+    }
+}
 

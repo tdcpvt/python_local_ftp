@@ -266,6 +266,32 @@ def change_password():
         return jsonify({"status": "success"})
     return "Error updating record", 400
 
+@app.route('/admin/edit_user', methods=['POST'])
+def edit_user():
+    if session.get('role') != 'admin':
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+
+    target_user = request.form.get('target_user')
+    new_password = request.form.get('new_password')
+    new_role = request.form.get('new_role')
+    can_delete = request.form.get('can_delete') == 'true'
+
+    db = load_db()
+
+    if target_user not in db['users']:
+        return jsonify({'status': 'error', 'message': 'User not found'}), 404
+
+    # Update attributes if provided
+    if new_password:
+        db['users'][target_user]['password'] = new_password
+    if new_role:
+        db['users'][target_user]['role'] = new_role
+    
+    db['users'][target_user]['can_delete'] = can_delete
+
+    save_db(db)
+    return jsonify({'status': 'success', 'message': f'User {target_user} updated successfully'})
+
 # --- REGISTER NETWORK ADMIN UTILITIES EXTENSION MODULE ---
 import network_admin
 network_admin.register_network_routes(app, load_db, save_db, get_local_ip, LocalNameAdvertisement)

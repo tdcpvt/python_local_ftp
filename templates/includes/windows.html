@@ -47,7 +47,7 @@
 
 <!-- WINDOW 2: ADMIN SECTOR CONSOLE -->
 {% if role == 'admin' %}
-<div class="xp-window" id="adminWindow" style="height: 390px;">
+<div class="xp-window" id="adminWindow" style="height: 410px;">
     <div class="window-header">
         <span>User Account Configuration & Capacity Manager</span>
         <div class="close-btn" onclick="closeWindow('adminWindow')">X</div>
@@ -61,7 +61,7 @@
             <div style="margin-top:4px; text-align:right;" id="adminQuotaTextLogger">Calculating space...</div>
         </div>
 
-        <form action="/admin/create_user" method="POST" style="background:#e4e2d5; padding:6px; border:1px solid #b5b2a1; display:flex; gap:6px; align-items:center;">
+        <form action="/admin/create_user" method="POST" style="background:#e4e2d5; padding:6px; border:1px solid #b5b2a1; display:flex; gap:6px; align-items:center; margin-bottom:10px;">
             <input type="text" name="username" placeholder="Username" required style="width:25%; font-size:11px; margin-bottom:0; color:black;">
             <input type="password" name="password" placeholder="Password" required style="width:25%; font-size:11px; margin-bottom:0; color:black;">
             <select name="can_delete" style="width:25%; font-size:11px; margin-bottom:0; color:black;">
@@ -70,8 +70,15 @@
             </select>
             <button type="submit" class="action-btn" style="padding:2px 8px;">Provision</button>
         </form>
+
         <table class="admin-table">
-            <thead><tr><th>User Client</th><th>Privilege</th><th>Action</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>User Client</th>
+                    <th>Privilege</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
             <tbody>
                 {% if full_db %}
                     {% for user, data in full_db.items() %}
@@ -79,13 +86,47 @@
                     <tr id="row-user-{{ user }}">
                         <td><strong>{{ user }}</strong></td>
                         <td>{{ 'Full File Deletion' if data.can_delete else 'Read/Write Only' }}</td>
-                        <td><button class="delete-action-btn" onclick="deleteUserAccount('{{ user }}')">❌ Remove</button></td>
+                        <td>
+                            <button class="action-btn" onclick="openEditUserModal('{{ user }}', '{{ data.role }}', {{ 'true' if data.can_delete else 'false' }})" style="padding:1px 6px; font-size:11px;">✏️ Edit</button>
+                            <button class="delete-action-btn" onclick="deleteUserAccount('{{ user }}')" style="padding:1px 6px; font-size:11px;">❌ Remove</button>
+                        </td>
                     </tr>
                     {% endif %}
                     {% endfor %}
                 {% endif %}
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- EDIT USER MODAL DIALOG -->
+<div class="xp-window" id="editUserModal" style="display:none; position: fixed; top: 25%; left: 35%; width: 310px; z-index: 2000; height: auto;">
+    <div class="window-header">
+        <span>Edit User: <strong id="editTargetUsername" style="color: yellow;"></strong></span>
+        <div class="close-btn" onclick="closeEditUserModal()">X</div>
+    </div>
+    <div class="window-body" style="padding: 10px; background: #ece9d8;">
+        <form id="editUserForm" onsubmit="submitUserEdit(event)" style="font-size: 11px;">
+            <input type="hidden" id="editUsernameInput" name="target_user">
+            
+            <label style="display:block; margin-bottom: 2px;"><strong>New Password:</strong> (leave blank to keep current)</label>
+            <input type="password" id="editPasswordInput" placeholder="New Password" style="width: 95%; margin-bottom: 8px; color: black; font-size: 11px;">
+
+            <label style="display:block; margin-bottom: 2px;"><strong>Role:</strong></label>
+            <select id="editRoleSelect" name="new_role" style="width: 98%; margin-bottom: 8px; color: black; font-size: 11px; background: white;">
+                <option value="client">client</option>
+                <option value="admin">admin</option>
+            </select>
+
+            <label style="display:block; margin-bottom: 12px; cursor: pointer;">
+                <input type="checkbox" id="editCanDeleteCheck"> <strong>Allow File Deletion</strong>
+            </label>
+
+            <div style="text-align: right; display: flex; gap: 6px; justify-content: flex-end;">
+                <button type="submit" class="action-btn" style="padding: 3px 12px;">💾 Save</button>
+                <button type="button" class="action-btn" onclick="closeEditUserModal()" style="padding: 3px 12px;">Cancel</button>
+            </div>
+        </form>
     </div>
 </div>
 {% endif %}
@@ -102,8 +143,6 @@
         <button type="button" class="action-btn" onclick="commitPasswordUpdate()" style="margin-top:10px;">💾 Commit Update</button>
     </div>
 </div>
-
-
 
 <!-- WINDOW 4: NETWORK BROADCAST CONFIGURATION MANAGER (ADMIN ONLY) -->
 {% if role == 'admin' %}
@@ -132,4 +171,3 @@
     </div>
 </div>
 {% endif %}
-

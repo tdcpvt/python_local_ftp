@@ -73,4 +73,162 @@ th { background-color: #e2e0d0; color: black; }
 label { font-size: 11px; font-weight: bold; display: block; margin-top: 5px; color: black; }
 input[type="text"], input[type="password"], select { width: 90%; padding: 4px; border: 1px solid #7f9db9; margin-bottom: 8px; color: black; background: white; }
 .action-btn { background: linear-gradient(to bottom, #ffffff 0%, #dedcd0 100%); border: 1px solid #707070; padding: 4px 10px; cursor: pointer; font-size: 11px; font-weight: bold; color: black; }
-.
+
+/* Flexible container for icon grid */
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: calc(100vh - 40px); /* Fill screen height minus taskbar */
+    padding: 20px;
+    gap: 15px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Base style for individual icons */
+.desktop-icons .icon {
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    /* Static layout positioning when not being dragged */
+    position: relative; 
+}
+
+/* Ensure JS drag-and-drop overrides CSS when dragging starts */
+.desktop-icons .icon[style*="top"] {
+    position: absolute !important;
+}
+
+.start-menu-container {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 330px;
+    background: #ece9d8;
+    border: 2px solid #0054e3;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+}
+
+.start-menu-header {
+    background: linear-gradient(to right, #0054e3, #2880ea);
+    color: white;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.start-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px;
+    max-height: 350px;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.start-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 4px;
+    border: 1px solid #d4d0c8;
+    background: #f8f8f8;
+    cursor: pointer;
+}
+
+.start-grid-item:hover {
+    background: #316ac5;
+    color: white;
+}
+
+.start-grid-item:hover svg {
+    fill: white;
+}
+
+.grid-label {
+    font-size: 11px;
+    text-align: center;
+    margin-top: 4px;
+    word-break: break-word;
+}
+/* Fixed Taskbar at Bottom */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #1941a5 92%, #1941a5 100%);
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    z-index: 10000;
+}
+
+/* Classic XP Start Button */
+.start-btn {
+    background: linear-gradient(to bottom, #388e3c, #1b5e20);
+    color: white;
+    border: 1px solid #103e13;
+    border-radius: 0 8px 8px 0;
+    padding: 3px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.start-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* Fixed Start Menu Dropup Position */
+.start-menu-container {
+    position: fixed;
+    bottom: 30px; /* Sits directly on top of the 30px taskbar */
+    left: 0;
+    width: 330px;
+    background: #ece9d8;
+    border: 2px solid #0054e3;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+}
+/* Start Menu Bottom Footer */
+.start-menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #0054e3, #2880ea);
+    padding: 6px 10px;
+    border-top: 1px solid #002d80;
+}
+
+.start-footer-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.start-footer-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.start-footer-btn.logout-btn:hover {
+    background: #d32f2f;
+}

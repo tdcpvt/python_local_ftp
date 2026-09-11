@@ -17,6 +17,12 @@ function makeWindowDraggable(windowElement, handleElement) {
     dragHandle.ontouchstart = dragTouchStart;
 
     function dragMouseDown(e) {
+        // GUARD: Ignore drag event if clicking inside form input controls
+        const targetTag = e.target.tagName.toLowerCase();
+        if (['input', 'textarea', 'select', 'button'].includes(targetTag) || e.target.isContentEditable) {
+            return; 
+        }
+
         e.preventDefault();
         // Bring window to front
         focusWindow(windowElement);
@@ -53,6 +59,12 @@ function makeWindowDraggable(windowElement, handleElement) {
 
     // Touch Event Handlers
     function dragTouchStart(e) {
+        // GUARD: Ignore touch drag if touching form controls
+        const targetTag = e.target.tagName.toLowerCase();
+        if (['input', 'textarea', 'select', 'button'].includes(targetTag) || e.target.isContentEditable) {
+            return;
+        }
+
         focusWindow(windowElement);
         const touch = e.touches[0];
         pos3 = touch.clientX;
@@ -97,6 +109,12 @@ function makeIconDraggable(iconElement) {
     iconElement.style.cursor = 'pointer';
 
     iconElement.onmousedown = (e) => {
+        // GUARD: Ignore drag if clicking inputs inside icons (if any)
+        const targetTag = e.target.tagName.toLowerCase();
+        if (['input', 'textarea', 'select', 'button'].includes(targetTag)) {
+            return;
+        }
+
         e.preventDefault();
         pos3 = e.clientX;
         pos4 = e.clientY;
@@ -121,9 +139,9 @@ function makeIconDraggable(iconElement) {
 
 // Automatically bind draggable triggers when DOM loads
 document.addEventListener("DOMContentLoaded", () => {
-    // Bind all XP Windows by header handle
+    // Bind all XP Windows by header handle (or fallback to window if header not found)
     document.querySelectorAll('.xp-window').forEach(win => {
-        const header = win.querySelector('.xp-window-header');
+        const header = win.querySelector('.xp-window-header') || win.querySelector('.title-bar') || win;
         makeWindowDraggable(win, header);
     });
 
